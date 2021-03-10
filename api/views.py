@@ -15,4 +15,7 @@ def apiOverview(request):
 
 
 @api_view(['GET'])
-def api_overview(request):
+def products_view(request):
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)

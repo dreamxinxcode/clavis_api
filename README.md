@@ -1,1 +1,5 @@
-# clavis_api
+# Clavis Studio Product API
+
+username: clavis
+password: development
+
