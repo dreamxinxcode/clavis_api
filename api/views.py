@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .serializers import ProductSerializer
 from .models import Product
 from .utils import *
+import time
 
 
 @api_view(['GET'])
@@ -28,4 +29,5 @@ def update_prices(request):
         price = fetch_price(product)
         product.price = price
         product.save()
+        time.sleep(.25)
     return JsonResponse({})
