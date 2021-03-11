@@ -4,10 +4,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ProductSerializer
 from .models import Product
+from .utils import *
 
 
 @api_view(['GET'])
-def apiOverview(request):
+def api_overview(request):
     api_urls = {
         'List': '/products/',
     }
