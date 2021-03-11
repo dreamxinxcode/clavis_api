@@ -20,3 +20,12 @@ def products_view(request):
     products = Product.objects.all()
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
+
+
+def update_prices(request):
+    for product in Product.objects.all():
+        url = product.url
+        price = fetch_price(product)
+        product.price = price
+        product.save()
+    return JsonResponse({})
