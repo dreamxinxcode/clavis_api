@@ -23,6 +23,7 @@ def products_view(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
 def update_prices(request):
     for product in Product.objects.all():
         url = product.url
@@ -30,4 +31,7 @@ def update_prices(request):
         product.price = price
         product.save()
         time.sleep(.25)
-    return JsonResponse({})
+
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)

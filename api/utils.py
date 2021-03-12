@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import time
+import re
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36',
@@ -22,10 +24,17 @@ def fetch_price(product):
     if (retailer == 'ELTE'):
         price = soup.find("span", {"class": "pdp-priceActual"}).contents[0]
     if (retailer == 'CRATE_&_BARREL'):
-        price = soup.find("span", {"class": "regPrice"}).contents[0]
+        price = 'skipped'
+        #price = soup.find("span", {"class": "regPrice"}).contents[0]
+        #time.sleep(30)
     if (retailer == 'BOUCLAIR'):
         price = soup.find_all("span", {"class": "value"})[1].text
     if (retailer == 'ARTICLE'):
         price = soup.find("span", {"class": "regularPrice"}).contents[0]
 
+    price = price.strip()
+    price = price.replace('$', '')
+    price = price.replace(' ', '')
+    price = price.replace(',', '')
+    print('Price:', price)
     return price
